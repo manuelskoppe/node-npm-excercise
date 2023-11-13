@@ -90,10 +90,9 @@ let numeros=([
 console.log(flatArrayAndCalculateMean(numeros));
 
 function sortByNamesAndCapitalizeFirstLetter(arr) {
-  // Primero, ordenamos el arreglo por la propiedad 'name'
+  
   const sortedArray = _.sortBy(arr, ['name']);
 
-  // Luego, capitalizamos la primera letra del 'name' de cada objeto
   return sortedArray.map(obj => {
     return {
       ...obj,
@@ -107,13 +106,37 @@ let nombres = [
   { name: "alex" },
 ];
 
-// Esto debería imprimir: [{ name: "Alex" }, { name: "John" }]
+
 console.log(sortByNamesAndCapitalizeFirstLetter(nombres));
 
 function transformToSnakeCaseAndAllCaps(arr) {
   // Use the snakeCase() function from lodash to convert the string to snake_case
   // Use the toUpper() function from lodash to convert the string to uppercase
+  return arr.map(obj => {
+    // Crear un nuevo objeto para almacenar las claves transformadas
+    let transformedObj = {};
+
+    // Iterar sobre cada clave del objeto
+    for (let key in obj) {
+      // Convertir la clave a snake_case y luego a mayúsculas
+      let newKey = _.toUpper(_.snakeCase(key));
+      // Asignar el valor original a la nueva clave transformada
+      transformedObj[newKey] = obj[key];
+    }
+
+    // Devolver el nuevo objeto con claves transformadas
+    return transformedObj;
+  });
 }
+
+// Ejemplo de uso:
+let objects = [
+  { 'Foo Bar': 'value1' },
+  { 'fooBar': 'value2' },
+  { '--FOO-BAR--': 'value3' }
+];
+
+console.log(objects);
 
 module.exports = {
   sum,
